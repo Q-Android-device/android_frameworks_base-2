@@ -90,15 +90,7 @@ public class SystemSettingsValidators {
                         return value == null || value.length() < MAX_LENGTH;
                     }
                 });
-        VALIDATORS.put(
-                System.FONT_SCALE,
-                value -> {
-                    try {
-                        return Float.parseFloat(value) >= 0;
-                    } catch (NumberFormatException | NullPointerException e) {
-                        return false;
-                    }
-                });
+        VALIDATORS.put(System.FONT_SCALE, new InclusiveFloatRangeValidator(0.85f, 1.3f));
         VALIDATORS.put(System.DIM_SCREEN, BOOLEAN_VALIDATOR);
         VALIDATORS.put(
                 System.DISPLAY_COLOR_MODE,
@@ -265,5 +257,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.DOUBLE_TAP_SLEEP_GESTURE, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.DOUBLE_TAP_SLEEP_LOCKSCREEN, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.INCALL_FEEDBACK_VIBRATE, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.NOTIFICATION_HEADERS, BOOLEAN_VALIDATOR);
     }
 }
